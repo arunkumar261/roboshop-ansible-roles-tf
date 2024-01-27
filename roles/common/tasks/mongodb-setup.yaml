@@ -1,0 +1,43 @@
+- name :  setup MongoDB repo 
+  ansible.builtin.copy:
+    src : mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name : install mongodb-client
+  ansible.builtin.package:
+    name : mongodb-org-shell
+    state: present
+
+- name : "get the categories/products count present in catalogue.service file"
+  ansible.builtin.shell:  mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  register : product_count    #storing the list of or output of catalogue.service file products in product_count variable
+  when : component=="catalogue"
+
+#for user
+- name : "get the users count present in user.service file"
+  ansible.builtin.shell:  mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  register : user_count    #storing the list of or output of catalogue.service file users in user_count variable
+  when : component=="user"
+
+  
+
+# - name : "loading the data to the catalogue"
+#   ansible.builtin.shell:      # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
+#     cmd : "mongo --host mongodb.arundev.online < /app/schema/{{component}}.js"
+#     when :  product_count.stdout == "0" and component=="catalogue"     #basically in terminal stdout shows the no of products present
+#     #ignore_errors: true            # ignore error while executing anf proceed the execution
+
+
+- name: Loading the data to the catalogue
+  ansible.builtin.shell:
+    cmd: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
+  when: component =='catalogue' and product_count.stdout == "0"
+  #ignore_errors: true 
+
+
+- name : loading the data to the user
+  ansible.builtin.shell:         # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
+    cmd : "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
+  when :  component=="user" and user_count.stdout == "0"
+  #ignore_errors: true 
+

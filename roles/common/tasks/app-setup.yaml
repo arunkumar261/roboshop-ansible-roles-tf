@@ -1,0 +1,25 @@
+#these all tasks are common for some module so we r keeping here like user,cart,catalogue etc
+- name : creating user roboshop
+  ansible.builtin.user:
+    name : roboshop
+
+- name : recursively remove app directory if its present
+  ansible.builtin.file:
+    path : /app
+    state : absent
+    
+- name : creating app directory
+  ansible.builtin.file:
+    path : /app
+    state: directory
+
+- name : "downloading the {{component}} application"
+  ansible.builtin.get_url:
+    url: "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
+    dest: /tmp
+
+- name : "unzipping the {{component}}.js file"
+  ansible.builtin.unarchive:
+    src: "/tmp/{{component}}.zip"
+    dest: /app
+    remote_src: yes

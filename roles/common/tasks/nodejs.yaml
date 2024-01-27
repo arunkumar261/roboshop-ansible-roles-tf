@@ -1,0 +1,24 @@
+# node js installation is common for some module so we r writing it in common folder
+
+- name : disabling the previous nodejs package 
+  ansible.builtin.command :
+    cmd: "dnf module disable nodejs -y"
+
+- name : enabling the new nodejs package 
+  ansible.builtin.command :
+    cmd: "dnf module enable nodejs:18 -y"
+
+    # or below cmd we can use instead above two for disable and enable
+# - name : enabling and disabling node js 
+#   ansible.builtin.shell: dnf module disable nodejs -y ; dnf module enable nodejs:18 -y 
+
+
+- name : Install node js package
+  ansible.builtin.package:
+    name : nodejs
+    state : present
+
+- name : installing npm dependecies
+  ansible.builtin.command:  npm install
+  args :
+    chdir : /app

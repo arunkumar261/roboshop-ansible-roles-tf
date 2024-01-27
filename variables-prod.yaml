@@ -1,0 +1,10 @@
+MONGODB_HOST   : mongodb-prod.arundev.online
+REDIS_HOST     : redis-prod.arundev.online
+CATALOGUE_HOST : catalogue-prod.arundev.online
+USER_HOST      : user-prod.arundev.online
+CART_HOST      : cart-prod.arundev.online
+MYSQL_HOST     : mysql-prod.arundev.online
+RABBITMQ_HOST  : rabbitmq-prod.arundev.online
+SHIPPING_HOST  : shipping-prod.arundev.online
+PAYMENT_HOST   : payment-prod.arundev.online
+DISPATCH_HOST  : dispatch-prod.arundev.online

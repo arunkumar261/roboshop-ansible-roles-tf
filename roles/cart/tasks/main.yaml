@@ -1,0 +1,19 @@
+- name : app setup file importing here
+  ansible.builtin.import_role:
+    name : common           #folder/ role name present inside roles folder
+    tasks_from: app-setup
+
+- name : nodejs installation file importing
+  ansible.builtin.import_role:
+    name : common           #folder/ role name present inside roles folder
+    tasks_from: nodejs
+
+- name : setting up systemctl service things like deamonreload restart and enable 
+  ansible.builtin.import_role:
+    name : common           #folder/ role name present inside roles folder
+    tasks_from: systemd
+
+
+
+
+##we dont need mongodb client so we remove those import here

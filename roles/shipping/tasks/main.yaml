@@ -1,0 +1,19 @@
+- name : app setup file importing here
+  ansible.builtin.import_role:
+    name : common         
+    tasks_from: app-setup
+
+- name : java installation file importing
+  ansible.builtin.import_role:
+    name : common          
+    tasks_from: java
+
+- name : setting up mysql installations and load data
+  ansible.builtin.import_role:
+    name : common          
+    tasks_from: mysql-setup
+
+- name : setting up systemctl service things like deamonreload restart and enable 
+  ansible.builtin.import_role:
+    name : common          
+    tasks_from: systemd
