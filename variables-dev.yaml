@@ -8,5 +8,5 @@ CART_HOST      : cart.app-dev.arundev.online
 SHIPPING_HOST  : shipping.app-dev.arundev.online
 PAYMENT_HOST   : payment.app-dev.arundev.online
 DISPATCH_HOST  : dispatch.app-dev.arundev.online
-NEXUS_URL : http://172.31.11.122:8081/repository
+NEXUS_URL : http://172.31.25.31:8081/repository
 group_id : "com/roboshop"
