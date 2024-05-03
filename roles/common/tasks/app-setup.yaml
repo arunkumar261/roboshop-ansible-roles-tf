@@ -30,6 +30,8 @@
   ansible.builtin.get_url:
     url: "{{NEXUS_URL}}/{{component}}/{{group_id}}/{{component}}/{{app_version}}/{{component}}-{{app_version}}.zip"
     dest: /tmp
+    username: "{{username}}"
+    password: "{{password}}"
 
 - name : "extract the {{component}} file"
   ansible.builtin.unarchive:

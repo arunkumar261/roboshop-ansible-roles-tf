@@ -10,3 +10,5 @@ PAYMENT_HOST   : payment.app-dev.arundev.online
 DISPATCH_HOST  : dispatch.app-dev.arundev.online
 NEXUS_URL : http://172.31.25.31:8081/repository
 group_id : "com/roboshop"
+username : "admin"
+password: "admin123"
